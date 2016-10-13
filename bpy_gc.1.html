@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+
+    <title>buppy file storage</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/jumbotron-narrow.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  
+  <body>
+   <div class="pull-left">
+         Commands
+         <ul class="nav">
+            <li><a href="/bpy.1.html">bpy(1)</a></li>
+            <li><a href="/bpy_browse.1.html">bpy_browse(1)</a></li>
+            <li><a href="/bpy_hist.1.html">bpy_hist(1)</a></li>
+            <li><a href="/bpy_cat.1.html">bpy_cat(1)</a></li>
+            <li><a href="/bpy_cp.1.html">bpy_cp(1)</a></li>
+            <li><a href="/bpy_mv.1.html">bpy_mv(1)</a></li>
+            <li><a href="/bpy_gc.1.html">bpy_gc(1)</a></li>
+            <li><a href="/bpy_mkdir.1.html">bpy_mkdir(1)</a></li>
+            <li><a href="/bpy_ls.1.html">bpy_ls(1)</a></li>
+            <li><a href="/bpy_get.1.html">bpy_get(1)</a></li>
+            <li><a href="/bpy_put.1.html">bpy_put(1)</a></li>
+            <li><a href="/bpy_tar.1.html">bpy_tar(1)</a></li>
+            <li><a href="/bpy_zip.1.html">bpy_zip(1)</a></li>
+            <li><a href="/bpy_rm.1.html">bpy_rm(1)</a></li>
+        </ul>
+        Internals
+        <ul class="nav">
+            <li><a href="/bpy_htree.5.html">bpy_htree(5)</a></li>
+            <li><a href="/bpy_bpack.5.html">bpy_bpack(5)</a></li>
+            <li><a href="/bpy_ebpack.5.html">bpy_ebpack(5)</a></li>
+            <li><a href="/bpy_key.5.html">bpy_key(5)</a></li>
+        </ul>
+        Misc
+        <ul class="nav">
+            <li><a href="/bpy_env.7.html">bpy_env(7)</a></li>
+            <li><a href="/bpy_timespec.7.html">bpy_timespec(7)</a></li>
+        </ul>
+    </div>
+    <div class="container">
+        <div class="header">
+            <nav>
+                <ul class="nav nav-pills pull-right">
+                <li><a href="/">Home</a></li>
+                <li><a href="/bpy.1.html">Docs</a></li>
+                <li><a href="/downloads.html">Download</a></li>
+                </ul>
+            </nav>
+        <h1>bpy_gc(1)</h1>
+        </div>
+        <div>
+<h1 id="name">Name</h1>
+<p>bpy gc - garbage collect and reclaim unreachable space on the remote store.</p>
+<h1 id="synopsis">Synopsis</h1>
+<p>gc means garbage collection, this command is how space is reclaimed after files are rm'd using bpy_rm(1) and the undo history is pruned used bpy_hist(1). During a garbage collection, the remote will block any updates to roots, and any attempt to start a second collection will cause the original collection to safely fail.</p>
+<p>The gc command works by starting from the root and its history and traversing the data marking every chunk that is reachable. After the marking phase is completed, the gc will perform what is known as a 'sweep'. The sweep will traverse remote pack file indexes, fetching reachable data, and repacking it in new pack files with the garbage removed. Old pack files are only deleted once the new pack file is safely commited to disk storage, so disk usage may temporarily rise before the collection is completed.</p>
+<p>Because each pack file uses a unique IV key in its encryption, reachable data must be downloaded and reuploaded, this process can take some time when there are large amounts of packfiles that have unreachable data .A collection can be canceled at any time and resuming will not need to reprocess all the same data because repacked files will be fully reachable.</p>
+<p>The possibly slow speed of GC can be partially mitigated by utilizing a local bpy cache to completely remove the overhead of data fetching. Only the new pack data will be uploaded if the local cache has the needed data.</p>
+<h1 id="usage">Usage</h1>
+<p><code>$ bpy gc</code></p>
+<h1 id="example">Example</h1>
+<p>run the garbage collector</p>
+<pre><code>$ bpy gc</code></pre>
+<h1 id="see-also">SEE ALSO</h1>
+<p><strong>bpy(1)</strong>, <strong>bpy_hist(1)</strong></p>
+      <footer class="footer">
+        <p>&copy; 2016 buppy.io</p>
+      </footer>
+    </div>
+    </div>
+    </body>
+</html>

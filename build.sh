@@ -2,7 +2,7 @@ set -e
 
 for FILE in $GOPATH/src/github.com/buppyio/bpy/doc/*.md
 do
-    OUT=docroot/`basename -s .md $FILE`.html
+    OUT=`basename -s .md $FILE`.html
     cat doc.head.html > $OUT
     pandoc -f markdown -t html < $FILE >> $OUT
     cat doc.tail.html >> $OUT
