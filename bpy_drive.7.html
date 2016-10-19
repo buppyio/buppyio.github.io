@@ -65,17 +65,15 @@
                 <li><a href="/downloads.html">Download</a></li>
                 </ul>
             </nav>
-        <h1>bpy_timespec(7)</h1>
+        <h1>bpy_drive(7)</h1>
         </div>
         <div>
 <h1 id="name">Name</h1>
-<p>bpy time spec</p>
+<p>drive - a directory containing encrypted bpy file data.</p>
 <h1 id="synopsis">Synopsis</h1>
-<p>This page describes the time spec format used by the majority of bpy(1) commands.</p>
-<p>A time spec can take one of two formats, an exact date, or a relative time spec. Exact dates are specified in the format &quot;hh:mm:ss dd/MM/YYYY&quot; while relative times are specified as &quot;NN(s|m|h) ago&quot;.</p>
-<h1 id="example">Example</h1>
-<pre><code>bpy ls -when=&quot;5m ago&quot; # 5 minutes ago
-bpy ls -when=&quot;12:00:00 1/2/2016&quot;  # midday on the first of February 2016</code></pre>
+<p>A bpy drive is a directory on a machine that is interacted with via the bpy_remote(1) command. It contains a database of metadata holding important internal values to the drive, and a folder container bpy_ebpack(5) files, which contain the encrypted data chunks comprising the bpy filesystem.</p>
+<h1 id="see-also">SEE ALSO</h1>
+<p><strong>bpy(1)</strong>, <strong>bpy_bpack(5)</strong>, <strong>bpy_ebpack(5)</strong></p>
       <footer class="footer">
         <p>&copy; 2016 buppy.io</p>
       </footer>

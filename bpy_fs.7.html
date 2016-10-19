@@ -65,17 +65,17 @@
                 <li><a href="/downloads.html">Download</a></li>
                 </ul>
             </nav>
-        <h1>bpy_timespec(7)</h1>
+        <h1>bpy_fs(7)</h1>
         </div>
         <div>
 <h1 id="name">Name</h1>
-<p>bpy time spec</p>
+<p>fs - The bpy file system</p>
 <h1 id="synopsis">Synopsis</h1>
-<p>This page describes the time spec format used by the majority of bpy(1) commands.</p>
-<p>A time spec can take one of two formats, an exact date, or a relative time spec. Exact dates are specified in the format &quot;hh:mm:ss dd/MM/YYYY&quot; while relative times are specified as &quot;NN(s|m|h) ago&quot;.</p>
-<h1 id="example">Example</h1>
-<pre><code>bpy ls -when=&quot;5m ago&quot; # 5 minutes ago
-bpy ls -when=&quot;12:00:00 1/2/2016&quot;  # midday on the first of February 2016</code></pre>
+<p>Bpy stores files in a virtual file system built on top of a collection of bpy_ebpack(5) files. Every directory in the file system itself is comprised of bpy_htree(5) data structure, which has a data stream describing the directory contents.</p>
+<p>The directory data is laid out as follows as follows:</p>
+<p>XXX</p>
+<h1 id="see-also">SEE ALSO</h1>
+<p><strong>bpy(1)</strong></p>
       <footer class="footer">
         <p>&copy; 2016 buppy.io</p>
       </footer>

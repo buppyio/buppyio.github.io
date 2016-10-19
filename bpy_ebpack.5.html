@@ -43,13 +43,15 @@
         </ul>
         Internals
         <ul class="nav">
-            <li><a href="/bpy_htree.5.html">bpy_htree(5)</a></li>
-            <li><a href="/bpy_bpack.5.html">bpy_bpack(5)</a></li>
+        	<li><a href="/bpy_bpack.5.html">bpy_bpack(5)</a></li>
             <li><a href="/bpy_ebpack.5.html">bpy_ebpack(5)</a></li>
+        	<li><a href="/bpy_fs.7.html">bpy_fs(7)</a></li>
+            <li><a href="/bpy_htree.5.html">bpy_htree(5)</a></li>
             <li><a href="/bpy_key.5.html">bpy_key(5)</a></li>
         </ul>
         Misc
         <ul class="nav">
+        	<li><a href="/bpy_drive.7.html">bpy_drive(7)</a></li>
             <li><a href="/bpy_env.7.html">bpy_env(7)</a></li>
             <li><a href="/bpy_timespec.7.html">bpy_timespec(7)</a></li>
         </ul>
@@ -70,7 +72,7 @@
 <p>ebpack - ebpack files are encrypted bpy_bpack(5) files</p>
 <h1 id="synopsis">Synopsis</h1>
 <p>During normal operation bpy writes client side encrypted bpy_bpack(5) files (ebpack) to the remote server to hinder unauthorized access. The ebpack files are AES256 encrypted bpack files encrypted using a CTR mode cipher to allow security and random access decryption with a 32 byte granularity.</p>
-<p>The file format consists of a 32 byte random nonce, with N 32 byte blocks of data. Each block of data is created via the operation <code>XOR(AES256ENCRYPT(SECRETKEY, ADD(NONCE, N)), PLAINTEXT)</code> and each block of data is accessed via <code>XOR(AES256DECRYPT(SECRETKEY, ADD(NONCE, N)), CIPHERTEXT)</code>.</p>
+<p>The file format consists of a 32 byte random nonce, with N 32 byte blocks of data. Each block of data is created via the operation <code>XOR(AES256ENCRYPT(SECRETKEY, ADD(NONCE, N)), PLAINTEXT)</code> and each block of data is accessed via <code>XOR(AES256ENCRYPT(SECRETKEY, ADD(NONCE, N)), CIPHERTEXT)</code>.</p>
 <p>Because the input data may not be a multiple of 32 bytes, there is always a padded final block. There maybe be up to 32 bytes of padding in the tail of the final block, starting from the end padding bytes are 0x00, with a 0x80 byte denoting the final padding byte.</p>
 <p>An example of an encrypted file on disk is shown in the following diagram, and requires decryption before it can be accessed.</p>
 <pre><code>+-------------+
