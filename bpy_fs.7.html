@@ -64,58 +64,17 @@
                 <li><a href="/downloads.html">Download</a></li>
                 </ul>
             </nav>
-        <h1>bpy(1)</h1>
+        <h1>bpy_fs(7)</h1>
         </div>
         <div>
 <h1 id="name">Name</h1>
-<p>bpy - Buppy file storage from https://buppy.io</p>
+<p>fs - The bpy file system</p>
 <h1 id="synopsis">Synopsis</h1>
-<p><code>bpy</code> is a tool for storing files securely on a remote server. Data is encrypted and deduplicated by the client without giving the server access to any of the decryption keys. This means the server cannot access any of the stored data, and any data tampering will be detected by the client.</p>
-<h1 id="getting-started">Getting started</h1>
-<p>To use bpy you need to generate an encryption key. This key must be kept secret. N.B. Loss of this key means all data stored using the key will be lost <em>FOREVER</em>.</p>
-<pre><code>bpy new-key -f ~/.bpy/bpy.key</code></pre>
-<p>Next setup the remote server data is going to be stored in. It requires the bpy binary installed on your remote server, and a way to establish a connection to the bpy remote command. Here we use ssh.</p>
-<pre><code>export BPY_REMOTE_CMD=&quot;ssh $YOURSERVER bpy remote /home/youruser/bpydata&quot;</code></pre>
-<p>Finally, store a backup into the 'default' ref</p>
-<pre><code>echo &quot;important document&quot; &gt; document.txt
-bpy put document.txt</code></pre>
-<p>Once you have data stored in your bpy drive, there are multiple ways to retrieve it, try any of the follwing examples.</p>
-<p>View your data with 'ls' and read the contents with 'cat':</p>
-<pre><code>bpy ls
-bpy cat document.txt</code></pre>
-<p>View your data via the web interface:</p>
-<pre><code>bpy browse</code></pre>
-<h1 id="sub-commands">Sub Commands</h1>
-<h2 id="browse">browse</h2>
-<p>Launch a webserver and browse files a web browser</p>
-<h2 id="cat">cat</h2>
-<p>Read the contents of one or more file</p>
-<h2 id="chmod">chmod</h2>
-<p>Change the permissions of a file or folder in the specifed ref</p>
-<h2 id="cp">cp</h2>
-<p>Copy a file or folder</p>
-<h2 id="gc">gc</h2>
-<p>Run the garbage collector to reclaim unused space and merge small pack files</p>
-<h2 id="get">get</h2>
-<p>Download the contents of a folder</p>
-<h2 id="hist">hist</h2>
-<p>Fetch or prune the history</p>
-<h2 id="ls">ls</h2>
-<p>Get a directory listing of the specified folder</p>
-<h2 id="mv">mv</h2>
-<p>Move a file or folder</p>
-<h2 id="new-key">new-key</h2>
-<p>Generate a local key file used by bpy for encrypting data</p>
-<h2 id="put">put</h2>
-<p>Upload a local folder or file</p>
-<h2 id="rm">rm</h2>
-<p>Remove a file or folder</p>
-<h2 id="tar">tar</h2>
-<p>Create a tar archive from the contents of the specified folder</p>
-<h2 id="zip">zip</h2>
-<p>Create a zip archive from the contents of the specified folder</p>
+<p>Bpy stores files in a virtual file system built on top of a collection of bpy_ebpack(5) files. Every directory in the file system itself is comprised of bpy_htree(5) data structure, which has a data stream describing the directory contents.</p>
+<p>The directory data is laid out as follows as follows:</p>
+<p>XXX</p>
 <h1 id="see-also">SEE ALSO</h1>
-<p><strong>bpy_environment(7)</strong></p>
+<p><strong>bpy(1)</strong></p>
       <footer class="footer">
         <p>&copy; 2016 buppy.io</p>
       </footer>

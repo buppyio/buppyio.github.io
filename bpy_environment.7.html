@@ -64,58 +64,36 @@
                 <li><a href="/downloads.html">Download</a></li>
                 </ul>
             </nav>
-        <h1>bpy(1)</h1>
+        <h1>bpy_environment(7)</h1>
         </div>
         <div>
 <h1 id="name">Name</h1>
-<p>bpy - Buppy file storage from https://buppy.io</p>
+<p>bpy env - environment variables</p>
 <h1 id="synopsis">Synopsis</h1>
-<p><code>bpy</code> is a tool for storing files securely on a remote server. Data is encrypted and deduplicated by the client without giving the server access to any of the decryption keys. This means the server cannot access any of the stored data, and any data tampering will be detected by the client.</p>
-<h1 id="getting-started">Getting started</h1>
-<p>To use bpy you need to generate an encryption key. This key must be kept secret. N.B. Loss of this key means all data stored using the key will be lost <em>FOREVER</em>.</p>
-<pre><code>bpy new-key -f ~/.bpy/bpy.key</code></pre>
-<p>Next setup the remote server data is going to be stored in. It requires the bpy binary installed on your remote server, and a way to establish a connection to the bpy remote command. Here we use ssh.</p>
-<pre><code>export BPY_REMOTE_CMD=&quot;ssh $YOURSERVER bpy remote /home/youruser/bpydata&quot;</code></pre>
-<p>Finally, store a backup into the 'default' ref</p>
-<pre><code>echo &quot;important document&quot; &gt; document.txt
-bpy put document.txt</code></pre>
-<p>Once you have data stored in your bpy drive, there are multiple ways to retrieve it, try any of the follwing examples.</p>
-<p>View your data with 'ls' and read the contents with 'cat':</p>
-<pre><code>bpy ls
-bpy cat document.txt</code></pre>
-<p>View your data via the web interface:</p>
-<pre><code>bpy browse</code></pre>
-<h1 id="sub-commands">Sub Commands</h1>
-<h2 id="browse">browse</h2>
-<p>Launch a webserver and browse files a web browser</p>
-<h2 id="cat">cat</h2>
-<p>Read the contents of one or more file</p>
-<h2 id="chmod">chmod</h2>
-<p>Change the permissions of a file or folder in the specifed ref</p>
-<h2 id="cp">cp</h2>
-<p>Copy a file or folder</p>
-<h2 id="gc">gc</h2>
-<p>Run the garbage collector to reclaim unused space and merge small pack files</p>
-<h2 id="get">get</h2>
-<p>Download the contents of a folder</p>
-<h2 id="hist">hist</h2>
-<p>Fetch or prune the history</p>
-<h2 id="ls">ls</h2>
-<p>Get a directory listing of the specified folder</p>
-<h2 id="mv">mv</h2>
-<p>Move a file or folder</p>
-<h2 id="new-key">new-key</h2>
-<p>Generate a local key file used by bpy for encrypting data</p>
-<h2 id="put">put</h2>
-<p>Upload a local folder or file</p>
-<h2 id="rm">rm</h2>
-<p>Remove a file or folder</p>
-<h2 id="tar">tar</h2>
-<p>Create a tar archive from the contents of the specified folder</p>
-<h2 id="zip">zip</h2>
-<p>Create a zip archive from the contents of the specified folder</p>
+<p>This page describes the various environment variables used by bpy(1). The values bpy(1) is using can be inspected usign the bpy_env(1) command.</p>
+<h1 id="environment-variables">Environment Variables</h1>
+<h2 id="bpy_remote_cmd">BPY_REMOTE_CMD</h2>
+<p>BPY_REMOTE_CMD is executed by the bpy command when it needs to establish a connection to an instance of the bpy_remote(1) command. Stdin and stdout of this command must be piped to and from an instance of the remote server. It has no default value.</p>
+<p>Example:</p>
+<pre><code>$ export BPY_REMOTE_CMD=&quot;bpy remote /home/localuser/bpy_datadir&quot;
+$ export BPY_REMOTE_CMD=&quot;ssh $SERVER /bin/bpy remote /bpy_datadir&quot;</code></pre>
+<h2 id="bpy_path">BPY_PATH</h2>
+<p>BPY_PATH defaults to <code>$HOME/.bpy</code> and is the path that many other variables base their default values off.</p>
+<h2 id="bpy_icache_path">BPY_ICACHE_PATH</h2>
+<p>BPY_ICACHE_PATH defaults to <code>$BPY_PATH/icache/</code> and is the directory containing the index cache. The index cache contains a record of file key and value offsets allowing bpy to locate data within the remote pack files. The cache also enables bpy to keep track of what data it does not need to send to the server. It is safe to remove everthing inside this cache folder without losing data, because the pack indexes are also stored on the remote and are redownloaded if needed.</p>
+<p>An example directory tree populated with two indexes:</p>
+<pre><code>$BPY_ICACHE_PATH
+└── 111e0d...946ba0
+    ├── ba8a15...e6ee2e.ebpack.index
+    └── da1078...895c2f.ebpack.index</code></pre>
+<h2 id="bpy_cache_file">BPY_CACHE_FILE</h2>
+<p>BPY_CACHE_FILE defaults to <code>$BPY_PATH/chunks.db</code> and is a boltdb database file containing cached data chunks. This file is used to store data locally and greatly increase the performance of bpy(1) when accessing data. It is safe to remove this file when bpy is not using it and the data will be refetched from the remote.</p>
+<h2 id="bpy_cache_size">BPY_CACHE_SIZE</h2>
+<p>BPY_CACHE_SIZE defaults to <code>512 megabytes</code> and is the maximum size of the data stored in the BPY_CACHE_FILE. If the file contents exceed this size, the least recently used values will be discarded.</p>
+<h2 id="bpy_cache_listen_addr">BPY_CACHE_LISTEN_ADDR</h2>
+<p>BPY_CACHE_LISTEN_ADDR defaults to <code>127.0.0.1:8877</code> and is the address the bpy(1) will connect to for accessing the local data cache. If no service is listening on this address, bpy(1) will spawn a background instance of bpy_cache_daemon(1) using the configuration from the current environment.</p>
 <h1 id="see-also">SEE ALSO</h1>
-<p><strong>bpy_environment(7)</strong></p>
+<p><strong>bpy(1)</strong>, <strong>bpy_env(1)</strong></p>
       <footer class="footer">
         <p>&copy; 2016 buppy.io</p>
       </footer>
