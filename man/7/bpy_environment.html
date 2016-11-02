@@ -93,7 +93,7 @@ $ export BPY_REMOTE_CMD=&quot;ssh $SERVER /bin/bpy remote /bpy_datadir&quot;</co
 <h2 id="bpy_cache_size">BPY_CACHE_SIZE</h2>
 <p>BPY_CACHE_SIZE defaults to <code>512 megabytes</code> and is the maximum size of the data stored in the BPY_CACHE_FILE. If the file contents exceed this size, the least recently used values will be discarded.</p>
 <h2 id="bpy_cache_listen_addr">BPY_CACHE_LISTEN_ADDR</h2>
-<p>BPY_CACHE_LISTEN_ADDR defaults to <code>127.0.0.1:8877</code> and is the address the <a href="/man/1/bpy.html">bpy(1)</a> will connect to for accessing the local data cache. If no service is listening on this address, <a href="/man/1/bpy.html">bpy(1)</a> will spawn a background instance of bpy_<a href="/man/1/cache_daemon.html">cache_daemon(1)</a> using the configuration from the current environment.</p>
+<p>BPY_CACHE_LISTEN_ADDR defaults to <code>127.0.0.1:8877</code> and is the address the <a href="/man/1/bpy.html">bpy(1)</a> will connect to for accessing the local data cache. If no service is listening on this address, <a href="/man/1/bpy.html">bpy(1)</a> will spawn a background instance of <a href="/man/1/bpy_cache_daemon.html">bpy_cache_daemon(1)</a> using the configuration from the current environment.</p>
 <h1 id="see-also">SEE ALSO</h1>
 <p><strong><a href="/man/1/bpy.html">bpy(1)</a></strong>, <strong><a href="/man/1/bpy_env.html">bpy_env(1)</a></strong></p>
       <footer class="footer">

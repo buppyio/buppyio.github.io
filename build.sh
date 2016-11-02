@@ -8,7 +8,7 @@ buildpage () {
 	TITLE="$NAME($CATEGORY)"
 	
 	cat doc.head.html > $OUT
-	cat $IN | sed -r 's,([a-z]+_?[a-z]*)\(([0-9])\),[\1(\2)](/man/\2/\1.html),g' | pandoc -f markdown -t html >> $OUT
+	cat $IN | sed -r 's,([a-z_]+)\(([0-9])\),[\1(\2)](/man/\2/\1.html),g' | pandoc -f markdown -t html >> $OUT
 	cat doc.tail.html >> $OUT
 	sed -i "s/{{TITLE}}/$TITLE/g" $OUT
 }
