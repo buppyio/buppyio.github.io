@@ -1,16 +1,16 @@
 set -e
 
 buildpage () {
-	IN=$1
-	CATEGORY=$2
-	NAME=`basename -s .md $FILE`
-	OUT=./man/$CATEGORY/$NAME.html
-	TITLE="$NAME($CATEGORY)"
+	input=$1
+	category=$2
+	name=`basename -s .md $input`
+	output=./man/$category/$name.html
+	title="$name($category)"
 	
-	cat doc.head.html > $OUT
-	cat $IN | sed -r 's,([a-z_]+)\(([0-9])\),[\1(\2)](/man/\2/\1.html),g' | pandoc -f markdown -t html >> $OUT
-	cat doc.tail.html >> $OUT
-	sed -i "s/{{TITLE}}/$TITLE/g" $OUT
+	(cat doc.head.html
+	 sed -r 's,([a-z_]+)\(([0-9])\),[\1(\2)](/man/\2/\1.html),g' $input | pandoc -f markdown -t html
+	 cat doc.tail.html) |
+	sed "s/{{TITLE}}/$title/g" > $output
 }
 
 if test -e ./man
@@ -20,11 +20,11 @@ fi
 
 mkdir ./man
 
-for CATEGORY in `ls $GOPATH/src/github.com/buppyio/bpy/doc/man/`
+for category in `ls $GOPATH/src/github.com/buppyio/bpy/doc/man/`
 do
-	mkdir ./man/$CATEGORY/
-	for FILE in $GOPATH/src/github.com/buppyio/bpy/doc/man/$CATEGORY/*.md
+	mkdir ./man/$category/
+	for file in $GOPATH/src/github.com/buppyio/bpy/doc/man/$category/*.md
 	do
-		buildpage $FILE $CATEGORY
+		buildpage $file $category
 	done
 done
