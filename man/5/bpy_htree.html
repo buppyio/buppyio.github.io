@@ -75,9 +75,9 @@
 <p>bpy stores all data internally as a hash tree data structure. Each node in tree is given an address which reflects a bpack key used to locate the node data. The node address is calculated as <code>SHA256(DEFLATE(NODEDATA))</code>, where the node data stored at the address is either a flate compressed list of stream offsets and child node addresses, or for leaf nodes, the flate compressed stream data itself.</p>
 <p>The htree data structure is important to bpy as it enables the following properties:</p>
 <ul>
-<li>Large amounts of data can be stored in chunks that are small enough to not violate the size limits of bpy_bpack(5) files.</li>
+<li>Large amounts of data can be stored in chunks that are small enough to not violate the size limits of <a href="/man/5/bpy_bpack.html">bpy_bpack(5)</a> files.</li>
 <li>Provide relatively efficient random access to the data stream while walking chunk contents, this allows 'seeking' when data streams are being accessed.</li>
-<li>Given two trees with identicle sub trees, all data can be cheaply deduplicated on disk by checking if the sub tree address is present in any bpy_(e)bpack(5) file.</li>
+<li>Given two trees with identicle sub trees, all data can be cheaply deduplicated on disk by checking if the sub tree address is present in any bpy_(e)<a href="/man/5/bpack.html">bpack(5)</a> file.</li>
 <li>Provides compression for runs of values in data.</li>
 </ul>
 <p>The following diagram shows what a 3 node htree will look like stored on disk in a bpack file:</p>
@@ -109,7 +109,7 @@ Chunk2, address = SHA256(Deflate(Chunk2))
 | +--------------+ |
 +------------------+</code></pre>
 <h1 id="see-also">SEE ALSO</h1>
-<p><strong>bpy_bpack(5)</strong>, <strong>bpy_fs(7)</strong></p>
+<p><strong><a href="/man/5/bpy_bpack.html">bpy_bpack(5)</a></strong>, <strong><a href="/man/7/bpy_fs.html">bpy_fs(7)</a></strong></p>
       <footer class="footer">
         <p>&copy; 2016 buppy.io</p>
       </footer>

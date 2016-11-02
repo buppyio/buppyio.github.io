@@ -72,7 +72,7 @@
 <h1 id="name">Name</h1>
 <p>bpy hist - list or prune a drive history</p>
 <h1 id="synopsis">Synopsis</h1>
-<p>Whenever you make a change to your bpy files, data not removed. Bpy maintains a full history of changes in case you ever need to revert a mistake such as accidental deletion of a file. The bpy hist command allows you to list this history, and even prune it. Pruning your history in conjunction with running bpy_gc(1) is the only way to purge data from the pack file storage.</p>
+<p>Whenever you make a change to your bpy files, data not removed. Bpy maintains a full history of changes in case you ever need to revert a mistake such as accidental deletion of a file. The bpy hist command allows you to list this history, and even prune it. Pruning your history in conjunction with running <a href="/man/1/bpy_gc.html">bpy_gc(1)</a> is the only way to purge data from the pack file storage.</p>
 <h1 id="usage">Usage</h1>
 <p><code>$ bpy hist list</code> <code>$ bpy hist prune [-all] [-older-than=TIMESPEC]</code></p>
 <h1 id="example">Example</h1>
@@ -83,7 +83,7 @@
 <p>Clear history older than midday on the first of February 2016:</p>
 <pre><code>$ bpy hist prune -older-than=&quot;12:00:00 1/2/2016&quot;</code></pre>
 <h1 id="see-also">SEE ALSO</h1>
-<p><strong>bpy(1)</strong>, <strong>bpy_gc(1)</strong>, <strong>bpy_timespec(7)</strong></p>
+<p><strong><a href="/man/1/bpy.html">bpy(1)</a></strong>, <strong><a href="/man/1/bpy_gc.html">bpy_gc(1)</a></strong>, <strong><a href="/man/7/bpy_timespec.html">bpy_timespec(7)</a></strong></p>
       <footer class="footer">
         <p>&copy; 2016 buppy.io</p>
       </footer>

@@ -72,10 +72,10 @@
 <h1 id="name">Name</h1>
 <p>bpy env - environment variables</p>
 <h1 id="synopsis">Synopsis</h1>
-<p>This page describes the various environment variables used by bpy(1). The values bpy(1) is using can be inspected usign the bpy_env(1) command.</p>
+<p>This page describes the various environment variables used by <a href="/man/1/bpy.html">bpy(1)</a>. The values <a href="/man/1/bpy.html">bpy(1)</a> is using can be inspected usign the <a href="/man/1/bpy_env.html">bpy_env(1)</a> command.</p>
 <h1 id="environment-variables">Environment Variables</h1>
 <h2 id="bpy_remote_cmd">BPY_REMOTE_CMD</h2>
-<p>BPY_REMOTE_CMD is executed by the bpy command when it needs to establish a connection to an instance of the bpy_remote(1) command. Stdin and stdout of this command must be piped to and from an instance of the remote server. It has no default value.</p>
+<p>BPY_REMOTE_CMD is executed by the bpy command when it needs to establish a connection to an instance of the <a href="/man/1/bpy_remote.html">bpy_remote(1)</a> command. Stdin and stdout of this command must be piped to and from an instance of the remote server. It has no default value.</p>
 <p>Example:</p>
 <pre><code>$ export BPY_REMOTE_CMD=&quot;bpy remote /home/localuser/bpy_datadir&quot;
 $ export BPY_REMOTE_CMD=&quot;ssh $SERVER /bin/bpy remote /bpy_datadir&quot;</code></pre>
@@ -89,13 +89,13 @@ $ export BPY_REMOTE_CMD=&quot;ssh $SERVER /bin/bpy remote /bpy_datadir&quot;</co
     ├── ba8a15...e6ee2e.ebpack.index
     └── da1078...895c2f.ebpack.index</code></pre>
 <h2 id="bpy_cache_file">BPY_CACHE_FILE</h2>
-<p>BPY_CACHE_FILE defaults to <code>$BPY_PATH/chunks.db</code> and is a boltdb database file containing cached data chunks. This file is used to store data locally and greatly increase the performance of bpy(1) when accessing data. It is safe to remove this file when bpy is not using it and the data will be refetched from the remote.</p>
+<p>BPY_CACHE_FILE defaults to <code>$BPY_PATH/chunks.db</code> and is a boltdb database file containing cached data chunks. This file is used to store data locally and greatly increase the performance of <a href="/man/1/bpy.html">bpy(1)</a> when accessing data. It is safe to remove this file when bpy is not using it and the data will be refetched from the remote.</p>
 <h2 id="bpy_cache_size">BPY_CACHE_SIZE</h2>
 <p>BPY_CACHE_SIZE defaults to <code>512 megabytes</code> and is the maximum size of the data stored in the BPY_CACHE_FILE. If the file contents exceed this size, the least recently used values will be discarded.</p>
 <h2 id="bpy_cache_listen_addr">BPY_CACHE_LISTEN_ADDR</h2>
-<p>BPY_CACHE_LISTEN_ADDR defaults to <code>127.0.0.1:8877</code> and is the address the bpy(1) will connect to for accessing the local data cache. If no service is listening on this address, bpy(1) will spawn a background instance of bpy_cache_daemon(1) using the configuration from the current environment.</p>
+<p>BPY_CACHE_LISTEN_ADDR defaults to <code>127.0.0.1:8877</code> and is the address the <a href="/man/1/bpy.html">bpy(1)</a> will connect to for accessing the local data cache. If no service is listening on this address, <a href="/man/1/bpy.html">bpy(1)</a> will spawn a background instance of bpy_<a href="/man/1/cache_daemon.html">cache_daemon(1)</a> using the configuration from the current environment.</p>
 <h1 id="see-also">SEE ALSO</h1>
-<p><strong>bpy(1)</strong>, <strong>bpy_env(1)</strong></p>
+<p><strong><a href="/man/1/bpy.html">bpy(1)</a></strong>, <strong><a href="/man/1/bpy_env.html">bpy_env(1)</a></strong></p>
       <footer class="footer">
         <p>&copy; 2016 buppy.io</p>
       </footer>
